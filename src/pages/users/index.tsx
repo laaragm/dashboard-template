@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
     Box,
     Button,
@@ -38,15 +39,17 @@ export default function UserList() {
                         <Heading size="lg" fontWeight="normal">
                             Users
                         </Heading>
-                        <Button
-                            as="a"
-                            size="sm"
-                            fontSize="sm"
-                            colorScheme="pink"
-                            leftIcon={<Icon as={RiAddLine} />}
-                        >
-                            Create new User
-                        </Button>
+                        <Link href="/users/create" passHref>
+                            <Button
+                                as="a"
+                                size="sm"
+                                fontSize="sm"
+                                colorScheme="pink"
+                                leftIcon={<Icon as={RiAddLine} />}
+                            >
+                                Create new User
+                            </Button>
+                        </Link>
                     </Flex>
 
                     <Table colorScheme="whiteAlpha">
