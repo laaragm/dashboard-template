@@ -35,7 +35,6 @@ export function Header() {
                 color="gray.200"
                 bg="gray.800"
                 borderRadius="full"
-                // position="relative"
             >
                 <Input
                     color="gray.50"
