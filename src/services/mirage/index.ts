@@ -1,4 +1,4 @@
-import { createServer, Model, Factory } from "miragejs";
+import { createServer, Model, Factory, Response } from "miragejs";
 import faker from "faker";
 
 type User = {
@@ -27,13 +27,28 @@ export function makeServer() {
             }),
         },
         seeds(server) {
-            server.createList("user", 15);
+            server.createList("user", 200);
         },
         routes() {
             this.namespace = "api";
             this.timing = 750;
 
-            this.get("/users");
+            this.get("/users", function (schema, request) {
+                const { page = 1, quantityPerPage = 5 } = request.queryParams;
+                const total = schema.all("user").length;
+                const offsetStart = (+page - 1) * +quantityPerPage;
+                const offsetEnd = offsetStart + +quantityPerPage;
+                const users = this.serialize(schema.all("user")).users.slice(
+                    offsetStart,
+                    offsetEnd
+                );
+
+                return new Response(
+                    200,
+                    { "x-total-count": String(total) },
+                    { users }
+                );
+            });
             this.post("/users");
             this.delete("/users");
             this.put("/users");
