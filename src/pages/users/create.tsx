@@ -62,6 +62,7 @@ export default function CreateUser() {
             },
         }
     );
+
     const { register, handleSubmit, formState } = useForm({
         resolver: yupResolver(createUserFormSchema),
     });
