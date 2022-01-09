@@ -32,7 +32,6 @@ import { api } from "../../services/api";
 out due to some issues with miragejs. Anyway, in case you have a real backend it 
 should work properly. */
 export default function UserList({ users }) {
-    console.log("USERS: ", users);
     const [page, setPage] = useState(1);
     const { data, isLoading, isFetching, error } = useUsers(page, {
         initialData: users,
